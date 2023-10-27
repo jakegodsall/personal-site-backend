@@ -7,7 +7,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-@NoArgsConstructor @AllArgsConstructor @Getter @Setter @Builder
+@NoArgsConstructor @AllArgsConstructor @Getter @Setter
 public class Post extends BaseEntity {
     private String title;
     private String description;

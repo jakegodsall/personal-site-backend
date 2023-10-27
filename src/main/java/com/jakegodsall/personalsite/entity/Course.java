@@ -7,7 +7,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-@NoArgsConstructor @AllArgsConstructor @Getter @Setter @Builder @ToString
+@NoArgsConstructor @AllArgsConstructor @Getter @Setter
 public class Course extends BaseEntity {
     private String name;
     private String author;
