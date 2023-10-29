@@ -24,7 +24,7 @@ public class Project extends BaseEntity {
     @Column(name = "project_end_date", nullable = false)
     private LocalDate projectEndDate;
 
-    private String GithubUrl;
+    private String githubUrl;
 
     private String liveUrl;
 

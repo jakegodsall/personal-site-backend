@@ -4,9 +4,6 @@ import lombok.*;
 import java.time.LocalDateTime;
 
 @NoArgsConstructor @AllArgsConstructor @Getter @Setter @Builder @ToString
-public class TagDto {
-    private Long id;
-    private LocalDateTime lastModifiedDate;
-    private LocalDateTime createdDate;
+public class TagDto extends BaseDto {
     private String name;
 }
