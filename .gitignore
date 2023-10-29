@@ -33,4 +33,4 @@ build/
 .vscode/
 
 # Database initialisation
-initdb.sql
+db_initialisation.sql

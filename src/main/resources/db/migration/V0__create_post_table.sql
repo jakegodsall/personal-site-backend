@@ -1,5 +1,4 @@
 DROP TABLE IF EXISTS post;
-
 CREATE TABLE post (
     id BIGINT PRIMARY KEY,
     last_modified_date DATETIME NOT NULL,

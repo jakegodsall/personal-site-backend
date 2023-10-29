@@ -1,5 +1,4 @@
 DROP TABLE IF EXISTS course;
-
 CREATE TABLE course (
     id BIGINT PRIMARY KEY,
     last_modified_date DATETIME NOT NULL,

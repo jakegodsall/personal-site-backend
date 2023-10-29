@@ -1,5 +1,3 @@
-DROP TABLE IF EXISTS course_tag;
-
 CREATE TABLE course_tag (
     course_id BIGINT NOT NULL,
     tag_id BIGINT NOT NULL,

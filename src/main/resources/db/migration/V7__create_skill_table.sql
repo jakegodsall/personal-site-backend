@@ -1,7 +1,6 @@
-DROP TABLE IF EXISTS tag;
-CREATE TABLE tag (
+CREATE TABLE skill (
     id BIGINT PRIMARY KEY,
     last_modified_date DATETIME NOT NULL,
     created_date DATETIME NOT NULL,
     name VARCHAR(100) NOT NULL
-);
+)
