@@ -34,6 +34,8 @@ public class TagServiceImpl implements TagService {
         Tag tag = repository.findById(id).orElseThrow(
                 () -> new ResourceNotFoundException("Tag", "id", id)
         );
+
+        System.out.println("From GET tag request: " + tag);
         // map to DTO and return
         return mapToDto(tag);
     }
@@ -42,9 +44,20 @@ public class TagServiceImpl implements TagService {
     public TagDto createTag(TagDto dto) {
         // Create an entity from the DTO
         Tag tag = mapToEntity(dto);
+
+        // Set read-only fields
+        LocalDateTime createdDate = LocalDateTime.now();
+        tag.setCreatedDate(createdDate);
+        tag.setLastModifiedDate(createdDate);
+        System.out.println("Original Tag: " + tag);
+
         // Store it in the database
         Tag tagInDb = repository.save(tag);
+
         // Convert the stored entity to DTO and return
+        System.out.println("Tag in DB: " + tagInDb);
+        System.out.println(tagInDb.getCreatedDate());
+
         return mapToDto(tagInDb);
     }
 

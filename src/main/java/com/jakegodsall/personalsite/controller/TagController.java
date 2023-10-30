@@ -14,7 +14,7 @@ import java.util.List;
 @RequestMapping("/api/tags")
 public class TagController {
 
-    TagService service;
+    private final TagService service;
 
     public TagController(TagService service) {
         this.service = service;

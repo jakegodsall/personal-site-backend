@@ -1,5 +1,6 @@
 package com.jakegodsall.personalsite.entity;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -10,18 +11,18 @@ import java.time.LocalDateTime;
 
 @MappedSuperclass
 @Getter @Setter
-public class BaseEntity {
+public abstract class BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @LastModifiedDate
-    @Column(nullable = false)
+    @Column(name = "last_modified_date", nullable = false, updatable = false, insertable = false)
     private LocalDateTime lastModifiedDate;
 
     @CreatedDate
-    @Column(nullable = false)
+    @Column(name = "created_date", nullable = false, updatable = false, insertable = false)
     private LocalDateTime createdDate;
 
 }

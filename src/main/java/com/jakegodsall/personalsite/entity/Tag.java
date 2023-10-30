@@ -15,4 +15,13 @@ public class Tag extends BaseEntity {
     private Set<Post> posts = new HashSet<>();
     @ManyToMany(mappedBy = "tags")
     private Set<Course> courses = new HashSet<>();
+
+    @Override
+    public String toString() {
+        return "Id: " + this.getId() + "\n" +
+                "Created Date: " + this.getCreatedDate() + "\n" +
+                "Last Modified Date: " + this.getLastModifiedDate() + "\n" +
+                "Name: " + this.getName();
+
+    }
 }
