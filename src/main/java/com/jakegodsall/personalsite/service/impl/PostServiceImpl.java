@@ -41,8 +41,15 @@ public class PostServiceImpl implements PostService {
     public PostDto createPost(PostDto dto) {
         // Create entity from DTO
         Post post = mapToEntity(dto);
+
+        // Set read-only fields
+        LocalDateTime createdDate = LocalDateTime.now();
+        post.setCreatedDate(createdDate);
+        post.setLastModifiedDate(createdDate);
+
         // Save in the database
         Post postInDb = repository.save(post);
+
         // Convert to DTO and return
         return mapToDto(postInDb);
     }
