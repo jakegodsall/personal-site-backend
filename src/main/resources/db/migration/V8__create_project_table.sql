@@ -1,5 +1,5 @@
 CREATE TABLE project (
-    id BIGINT PRIMARY KEY,
+    id BIGINT PRIMARY KEY AUTO_INCREMENT,
     last_modified_date DATETIME NOT NULL,
     created_date DATETIME NOT NULL,
     name VARCHAR(100) NOT NULL,
