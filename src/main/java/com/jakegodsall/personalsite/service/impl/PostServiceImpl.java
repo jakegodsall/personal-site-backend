@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class PostServiceImpl implements PostService {
@@ -28,16 +29,6 @@ public class PostServiceImpl implements PostService {
     }
 
     @Override
-    public PostDto getPostById(long id) {
-        // get the entity from the db
-        Post post = repository.findById(id).orElseThrow(
-                () -> new ResourceNotFoundException("Post", "id", id)
-        );
-        // map to DTO and return
-        return mapToDto(post);
-    }
-
-    @Override
     public PostDto createPost(PostDto dto) {
         // Create entity from DTO
         Post post = mapToEntity(dto);
@@ -52,6 +43,16 @@ public class PostServiceImpl implements PostService {
 
         // Convert to DTO and return
         return mapToDto(postInDb);
+    }
+
+    @Override
+    public Optional<PostDto> getPostById(long id) {
+        // get the entity from the db
+        Post post = repository.findById(id).orElseThrow(
+                () -> new ResourceNotFoundException("Post", "id", id)
+        );
+        // map to DTO and return
+        return Optional.of(mapToDto(post));
     }
 
     @Override

@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class CourseServiceImpl implements CourseService {
@@ -45,13 +46,13 @@ public class CourseServiceImpl implements CourseService {
     }
 
     @Override
-    public CourseDto getCourseById(Long id) {
+    public Optional<CourseDto> getCourseById(Long id) {
         // Get the entity from the repository
         Course course = courseRepository.findById(id).orElseThrow(
                 () -> new ResourceNotFoundException("Course", "id", id)
         );
         // Map to DTO and return
-        return this.mapToDto(course);
+        return Optional.of(mapToDto(course));
     }
 
     @Override

@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class TagServiceImpl implements TagService {
@@ -29,17 +30,6 @@ public class TagServiceImpl implements TagService {
     }
 
     @Override
-    public TagDto getTagById(long id) {
-        // get the tag from the db
-        Tag tag = repository.findById(id).orElseThrow(
-                () -> new ResourceNotFoundException("Tag", "id", id)
-        );
-
-        // map to DTO and return
-        return mapToDto(tag);
-    }
-
-    @Override
     public TagDto createTag(TagDto dto) {
         // Create an entity from the DTO
         Tag tag = mapToEntity(dto);
@@ -55,6 +45,17 @@ public class TagServiceImpl implements TagService {
         // Convert the stored entity to DTO and return
 
         return mapToDto(tagInDb);
+    }
+
+    @Override
+    public Optional<TagDto> getTagById(long id) {
+        // get the tag from the db
+        Tag tag = repository.findById(id).orElseThrow(
+                () -> new ResourceNotFoundException("Tag", "id", id)
+        );
+
+        // map to DTO and return
+        return Optional.of(mapToDto(tag));
     }
 
     @Override

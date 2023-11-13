@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class SkillServiceImpl implements SkillService {
@@ -45,11 +46,11 @@ public class SkillServiceImpl implements SkillService {
     }
 
     @Override
-    public SkillDto getSkillById(long id) {
+    public Optional<SkillDto> getSkillById(long id) {
         Skill skillFromDb = repository.findById(id).orElseThrow(
                 () -> new ResourceNotFoundException("Skill", "id", id)
         );
-        return mapToDto(skillFromDb);
+        return Optional.of(mapToDto(skillFromDb));
     }
 
     @Override
