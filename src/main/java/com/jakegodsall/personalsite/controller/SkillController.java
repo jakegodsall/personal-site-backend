@@ -11,24 +11,26 @@ import java.net.URI;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/v1/skills")
 public class SkillController {
 
-    private final SkillService service;
+    private static final String PATH_V1_SKILL = "/api/v1/skills";
+    private static final String PATH_V1_SKILL_ID = PATH_V1_SKILL + "/{skillId}";
 
-    public SkillController(SkillService service) {
-        this.service = service;
+    private final SkillService skillService;
+
+    public SkillController(SkillService skillService) {
+        this.skillService = skillService;
     }
 
-    @GetMapping
+    @GetMapping(PATH_V1_SKILL)
     public ResponseEntity<List<SkillDto>> getAllSkills() {
-        List<SkillDto> skills = service.getAllSkills();
+        List<SkillDto> skills = skillService.getAllSkills();
         return new ResponseEntity<>(skills, HttpStatus.OK);
     }
 
-    @PostMapping
+    @PostMapping(PATH_V1_SKILL)
     public ResponseEntity<SkillDto> createSkill(@RequestBody SkillDto dto) {
-        SkillDto skill = service.createSkill(dto);
+        SkillDto skill = skillService.createSkill(dto);
         URI location = ServletUriComponentsBuilder
                 .fromCurrentRequest()
                 .path("/{id}")
@@ -37,24 +39,24 @@ public class SkillController {
         return ResponseEntity.created(location).body(skill);
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<SkillDto> getSkillById(@PathVariable long id) {
-        SkillDto skill = service.getSkillById(id);
+    @GetMapping(PATH_V1_SKILL_ID)
+    public ResponseEntity<SkillDto> getSkillById(@PathVariable long skillId) {
+        SkillDto skill = skillService.getSkillById(skillId).get();
         return new ResponseEntity<>(skill, HttpStatus.OK);
     }
 
-    @PutMapping("/{id}")
+    @PutMapping(PATH_V1_SKILL_ID)
     public ResponseEntity<SkillDto> updateSkillById(
             @RequestBody SkillDto dto,
-            @PathVariable long id
+            @PathVariable long skillId
     ) {
-        SkillDto skill = service.updateSkillById(dto, id);
+        SkillDto skill = skillService.updateSkillById(dto, skillId);
         return new ResponseEntity<>(skill, HttpStatus.OK);
     }
 
-    @DeleteMapping
-    public ResponseEntity<Void> deleteSkillById(@PathVariable long id) {
-        service.deleteSkillById(id);
+    @DeleteMapping(PATH_V1_SKILL_ID)
+    public ResponseEntity<Void> deleteSkillById(@PathVariable long skillId) {
+        skillService.deleteSkillById(skillId);
         return ResponseEntity.noContent().build();
     }
 }

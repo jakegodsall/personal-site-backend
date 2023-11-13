@@ -2,8 +2,6 @@ package com.jakegodsall.personalsite.controller;
 
 import com.jakegodsall.personalsite.payload.PostDto;
 import com.jakegodsall.personalsite.service.PostService;
-import com.jakegodsall.personalsite.service.impl.PostServiceImpl;
-import org.apache.coyote.Response;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -14,24 +12,24 @@ import java.util.List;
 
 
 @RestController
-@RequestMapping("/api/v1/posts")
 public class PostController {
+    private static final String PATH_V1_POST = "/api/v1/posts";
+    private static final String PATH_V1_POST_ID = PATH_V1_POST + "/{postId}";
+    private final PostService postService;
 
-    private final PostService service;
-
-    public PostController(PostService service) {
-        this.service = service;
+    public PostController(PostService postService) {
+        this.postService = postService;
     }
 
-    @GetMapping
+    @GetMapping(PATH_V1_POST)
     public ResponseEntity<List<PostDto>> getAllPosts() {
-        List<PostDto> posts = service.getAllPosts();
+        List<PostDto> posts = postService.getAllPosts();
         return new ResponseEntity<>(posts, HttpStatus.OK);
     }
 
-    @PostMapping
+    @PostMapping(PATH_V1_POST)
     public ResponseEntity<PostDto> createPost(@RequestBody PostDto postDto) {
-        PostDto post = service.createPost(postDto);
+        PostDto post = postService.createPost(postDto);
         URI location = ServletUriComponentsBuilder
                 .fromCurrentRequest()
                 .path("/{id}")
@@ -40,24 +38,24 @@ public class PostController {
         return ResponseEntity.created(location).body(post);
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<PostDto> getPostById(@PathVariable long id) {
-        PostDto post = service.getPostById(id);
+    @GetMapping(PATH_V1_POST_ID)
+    public ResponseEntity<PostDto> getPostById(@PathVariable long postId) {
+        PostDto post = postService.getPostById(postId).get();
         return new ResponseEntity<>(post, HttpStatus.OK);
     }
 
-    @PutMapping("/{id}")
+    @PutMapping(PATH_V1_POST_ID)
     public ResponseEntity<PostDto> updatePostById(
             @RequestBody PostDto postDto,
-            @PathVariable long id
+            @PathVariable long postId
     ) {
-        PostDto post = service.updatePost(postDto, id);
+        PostDto post = postService.updatePost(postDto, postId);
         return new ResponseEntity<>(post, HttpStatus.OK);
     }
 
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deletePostById(@PathVariable long id) {
-        service.deletePost(id);
+    @DeleteMapping(PATH_V1_POST_ID)
+    public ResponseEntity<Void> deletePostById(@PathVariable long postId) {
+        postService.deletePost(postId);
         return ResponseEntity.noContent().build();
     }
 }

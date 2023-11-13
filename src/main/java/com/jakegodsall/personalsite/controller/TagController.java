@@ -11,24 +11,24 @@ import java.net.URI;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/v1/tags")
 public class TagController {
+    private static final String PATH_V1_TAG = "/api/v1/tags";
+    private static final String PATH_V1_TAG_ID = PATH_V1_TAG + "/{tagId}";
+    private final TagService tagService;
 
-    private final TagService service;
-
-    public TagController(TagService service) {
-        this.service = service;
+    public TagController(TagService tagService) {
+        this.tagService = tagService;
     }
 
-    @GetMapping
+    @GetMapping(PATH_V1_TAG)
     public ResponseEntity<List<TagDto>> getAllTags() {
-        List<TagDto> tags = service.getAllTags();
+        List<TagDto> tags = tagService.getAllTags();
         return new ResponseEntity<>(tags, HttpStatus.OK);
     }
 
-    @PostMapping
+    @PostMapping(PATH_V1_TAG)
     public ResponseEntity<TagDto> createTag(@RequestBody TagDto dto) {
-        TagDto tag = service.createTag(dto);
+        TagDto tag = tagService.createTag(dto);
         URI location = ServletUriComponentsBuilder
                 .fromCurrentRequest()
                 .path("{id}")
@@ -37,24 +37,24 @@ public class TagController {
         return ResponseEntity.created(location).body(tag);
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<TagDto> getTagById(@PathVariable long id) {
-        TagDto tag = service.getTagById(id);
+    @GetMapping(PATH_V1_TAG_ID)
+    public ResponseEntity<TagDto> getTagById(@PathVariable long tagId) {
+        TagDto tag = tagService.getTagById(tagId).get();
         return new ResponseEntity<>(tag, HttpStatus.OK);
     }
 
-    @PutMapping("/{id}")
+    @PutMapping(PATH_V1_TAG_ID)
     public ResponseEntity<TagDto> updateTagById(
             @RequestBody TagDto dto,
-            @PathVariable long id
+            @PathVariable long tagId
     ) {
-        TagDto tag = service.updateTag(dto, id);
+        TagDto tag = tagService.updateTag(dto, tagId);
         return new ResponseEntity<>(tag, HttpStatus.OK);
     }
 
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteTagById(@PathVariable long id) {
-        service.deleteTagById(id);
+    @DeleteMapping(PATH_V1_TAG_ID)
+    public ResponseEntity<Void> deleteTagById(@PathVariable long tagId) {
+        tagService.deleteTagById(tagId);
         return ResponseEntity.noContent().build();
     }
 }
