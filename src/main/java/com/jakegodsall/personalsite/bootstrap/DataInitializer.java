@@ -26,7 +26,13 @@ public class DataInitializer implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
+        initializeTags();
+        initializeSkills();
+        initializePosts();
+        initializeCourses();
+    }
 
+    private void initializeTags() {
         ArrayList<TagDto> tags = new ArrayList<>();
         tags.add(new TagDto("programming"));
         tags.add(new TagDto("quantified self"));
@@ -35,7 +41,9 @@ public class DataInitializer implements CommandLineRunner {
         for (TagDto tag : tags) {
             tagService.createTag(tag);
         }
+    }
 
+    private void initializeSkills() {
         ArrayList<SkillDto> skills = new ArrayList<>();
         skills.add(new SkillDto("java"));
         skills.add(new SkillDto("spring boot"));
@@ -44,7 +52,9 @@ public class DataInitializer implements CommandLineRunner {
         for (SkillDto skill : skills) {
             skillService.createSkill(skill);
         }
+    }
 
+    private void initializePosts() {
         ArrayList<PostDto> posts = new ArrayList<>();
         posts.add(new PostDto("Building a RESTful API with Spring Boot",
                 "How to build REST APIs using Spring Boot and Java",
@@ -59,11 +69,20 @@ public class DataInitializer implements CommandLineRunner {
         for (PostDto post : posts) {
             postService.createPost(post);
         }
+    }
 
+    private void initializeCourses() {
         ArrayList<CourseDto> courses = new ArrayList<>();
-        courses.add(new CourseDto("Course 1", "Author 1", "https://course1.com"));
-        courses.add(new CourseDto("Course 2", "Author 2", "https://course2.com"));
-        courses.add(new CourseDto("Course 3", "Author 3", "https://course3.com"));
+        courses.add(new CourseDto("Web Development with React", "John Smith", "https://course1.com"));
+        courses.add(new CourseDto("Machine Learning for Beginners", "Alice Johnson", "https://course2.com"));
+        courses.add(new CourseDto("Python Programming Masterclass", "David Miller", "https://course3.com"));
+        courses.add(new CourseDto("Game Development in Unity", "Sarah Davis", "https://course4.com"));
+        courses.add(new CourseDto("Blockchain and Cryptocurrency Fundamentals", "Michael Anderson", "https://course5.com"));
+        courses.add(new CourseDto("Cybersecurity: Ethical Hacking and Penetration Testing", "Emily Roberts", "https://course6.com"));
+        courses.add(new CourseDto("Data Science with R: Analyzing Big Data", "Chris Baker", "https://course7.com"));
+        courses.add(new CourseDto("iOS App Development with Swift", "Emma Wilson", "https://course8.com"));
+        courses.add(new CourseDto("Full-Stack Web Development with Node.js", "Daniel Garcia", "https://course9.com"));
+        courses.add(new CourseDto("Artificial Intelligence: From Basics to Advanced", "Sophia Lee", "https://course10.com"));
 
         for (CourseDto course : courses) {
             courseService.createCourse(course);
