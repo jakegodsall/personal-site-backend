@@ -1,0 +1,9 @@
+DROP TABLE IF EXISTS role;
+
+CREATE TABLE role (
+    id BIGINT NOT NULL UNIQUE AUTO_INCREMENT,
+    created_date TIMESTAMP,
+    last_modified_date TIMESTAMP,
+    version BIGINT NOT NULL DEFAULT 0,
+    name VARCHAR(100) NOT NULL
+);
