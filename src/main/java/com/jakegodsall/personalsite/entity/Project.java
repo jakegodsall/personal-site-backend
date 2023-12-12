@@ -2,30 +2,41 @@ package com.jakegodsall.personalsite.entity;
 
 import com.fasterxml.jackson.annotation.JacksonInject;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
+import lombok.*;
 
 import java.time.LocalDate;
 import java.util.Set;
 
+@NoArgsConstructor
+@AllArgsConstructor
+@Getter
+@Setter
+@Builder
 @Entity
-@NoArgsConstructor @AllArgsConstructor
-@Getter @Setter
+@Table(name = "project")
 public class Project extends BaseEntity {
 
-    @Column(nullable = false)
+    @Size(max = 100)
+    @NotNull
+    @Column(length = 100, nullable = false)
     private String name;
 
+    @NotNull
     @Column(name = "project_start_date", nullable = false)
     private LocalDate projectStartDate;
 
+    @NotNull
     @Column(name = "project_end_date", nullable = false)
     private LocalDate projectEndDate;
 
+    @Size(max = 100)
+    @Column(length = 100)
     private String githubUrl;
 
+    @Size(max = 100)
+    @Column(length = 100)
     private String liveUrl;
 
     @ManyToMany

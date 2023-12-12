@@ -3,19 +3,25 @@ package com.jakegodsall.personalsite.entity;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.ManyToMany;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
+import lombok.*;
 
 import java.util.Set;
 
+@NoArgsConstructor
+@AllArgsConstructor
+@Getter
+@Setter
+@Builder
 @Entity
-@NoArgsConstructor @AllArgsConstructor
-@Getter @Setter
+@Table(name = "skill")
 public class Skill extends BaseEntity {
 
-    @Column(nullable = false)
+    @Size(max = 100)
+    @NotNull
+    @Column(length = 100, nullable = false)
     private String name;
 
     @ManyToMany(mappedBy = "skills")

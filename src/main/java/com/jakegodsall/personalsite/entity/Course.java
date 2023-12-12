@@ -1,22 +1,35 @@
 package com.jakegodsall.personalsite.entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 import lombok.*;
 
 import java.util.HashSet;
 import java.util.Set;
 
+@NoArgsConstructor
+@AllArgsConstructor
+@Getter
+@Setter
+@Builder
 @Entity
-@NoArgsConstructor @AllArgsConstructor @Getter @Setter
+@Table(name = "course")
 public class Course extends BaseEntity {
 
-    @Column(nullable = false)
+    @Size(max = 100)
+    @NotNull
+    @Column(length = 100, nullable = false)
     private String name;
 
-    @Column(nullable = false)
+    @Size(max = 100)
+    @NotNull
+    @Column(length = 100, nullable = false)
     private String author;
 
-    @Column(nullable = false)
+    @Size(max = 100)
+    @NotNull
+    @Column(length = 100, nullable = false)
     private String url;
 
     @ManyToMany(cascade = CascadeType.PERSIST)

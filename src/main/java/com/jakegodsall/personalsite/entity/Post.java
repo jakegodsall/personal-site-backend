@@ -1,19 +1,30 @@
 package com.jakegodsall.personalsite.entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 import lombok.*;
 
 import java.util.HashSet;
 import java.util.Set;
 
+@NoArgsConstructor
+@AllArgsConstructor
+@Getter
+@Setter
+@Builder
 @Entity
-@NoArgsConstructor @AllArgsConstructor @Getter @Setter
+@Table(name = "post")
 public class Post extends BaseEntity {
 
-    @Column(nullable = false)
+    @Size(max = 100)
+    @NotNull
+    @Column(length = 100, nullable = false)
     private String title;
 
-    @Column(nullable = false)
+    @Size(max = 100)
+    @NotNull
+    @Column(length = 100, nullable = false)
     private String description;
 
     @Column(nullable = false)

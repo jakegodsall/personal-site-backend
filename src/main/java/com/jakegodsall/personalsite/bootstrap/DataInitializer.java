@@ -26,10 +26,10 @@ public class DataInitializer implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        initializeTags();
-        initializeSkills();
-        initializePosts();
-        initializeCourses();
+//        initializeTags();
+//        initializeSkills();
+//        initializePosts();
+//        initializeCourses();
     }
 
     private void initializeTags() {

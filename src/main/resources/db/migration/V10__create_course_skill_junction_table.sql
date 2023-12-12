@@ -1,7 +1,10 @@
-CREATE TABLE course_skill (
+DROP TABLE IF EXISTS couse_skill;
+
+CREATE TABLE course_skill
+(
     course_id BIGINT,
-    skill_id BIGINT,
+    skill_id  BIGINT,
     PRIMARY KEY (course_id, skill_id),
-    FOREIGN KEY (course_id) REFERENCES course(id),
-    FOREIGN KEY (skill_id) REFERENCES skill(id)
+    FOREIGN KEY (course_id) REFERENCES course (id),
+    FOREIGN KEY (skill_id) REFERENCES skill (id)
 );
