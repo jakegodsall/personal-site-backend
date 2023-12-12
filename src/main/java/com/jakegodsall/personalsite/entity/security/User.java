@@ -8,6 +8,7 @@ import lombok.*;
 
 import java.util.HashSet;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -39,6 +40,16 @@ public class User extends BaseEntity {
             inverseJoinColumns = @JoinColumn(name = "role_id")
     )
     private Set<Role> roles = new HashSet<>();
+
+    @Transient
+    private Set<Authority> authorities;
+
+    public Set<Authority> getAuthorities() {
+        return this.roles.stream()
+                .map(Role::getAuthorities)
+                .flatMap(Set::stream)
+                .collect(Collectors.toSet());
+    }
 
     @Builder.Default
     private Boolean isAccountNonExpired = true;
